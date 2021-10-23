@@ -326,7 +326,7 @@ where `<function name>` is the name of the function
 
 `<variable name>` is a word which cannot contain any of
 
-`!` `<` `>` `=` ````` `+` `-` `*` `/` `"` `|` ` `
+`!` `<` `>` `=` `` ` `` `+` `-` `*` `/` `"` `|` ` `
 
 ### Numbers
 
