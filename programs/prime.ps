@@ -1,0 +1,44 @@
+#~ Gets user input, n, and prints all prime numbers from 0 to n ~#
+
+@declarations
+declare is_prime 1
+declare number 0
+declare current_number 2
+declare i 2
+@declarations
+
+@functions
+function determine_prime {
+    change is_prime 1
+    change current_number 2
+    while |current_number < i|
+    {
+        if |!i % current_number! = 0| {
+            change is_prime 0
+        } {}
+        change current_number !current_number + 1!
+    }
+}
+
+function increment_number {
+    change i !i + 1!
+}
+
+@functions
+
+@body
+show `Enter an integer, n.`
+capture number
+
+show `All prime number up to n are`
+
+while ||i < number| or |i = number||
+{
+    run determine_prime
+    if |is_prime = 1| {
+        show i
+    } {}
+    run increment_number
+}
+
+@body

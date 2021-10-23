@@ -1,0 +1,30 @@
+@declarations
+declare number 0
+declare current_number 0
+declare temp 0
+declare fn 0
+declare fnp1 1
+@declarations
+
+@functions
+function iterate_once {
+    change temp fn
+    change fn fnp1
+    change fnp1 !fnp1 + temp!
+    change current_number !current_number + 1!
+}
+@functions
+
+@body
+show `enter an integer, n`
+capture number
+
+while |current_number < number|
+{
+    run iterate_once
+}
+
+show `the nth fibonacci number is`
+show fn
+@body
+

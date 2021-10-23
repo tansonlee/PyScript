@@ -1,0 +1,44 @@
+@declarations
+declare number 0
+declare current_number 1
+@declarations
+
+@functions
+function print_message {
+    #~ divisible by 3 and 5 ~#
+    if |!current_number % 15! = 0| {
+        show `fizzbuzz`
+    } {
+
+    #~ divisible by 3 ~#
+    if |!current_number % 3! = 0| {
+        show `fizz`
+    } {
+
+    #~ divisible by 5 ~#
+    if |!current_number % 5! = 0| {
+        show `buzz`
+    } 
+    
+    #~ general case ~#
+    {
+        show current_number
+    }}}
+}
+
+function increment_number {
+   change current_number !current_number + 1! 
+}
+@functions
+
+@body
+show `Enter an integer, n`
+capture number
+
+while ||current_number < number| or |current_number = number||
+{
+    run print_message
+    run increment_number
+    
+}
+@body

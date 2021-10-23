@@ -1,0 +1,72 @@
+@declarations
+#~ determine_prime variables ~#
+declare d_prime_number 0 #~ argument ~#
+declare d_prime_result 0 #~ return value ~#
+declare d_prime_current 0 #~ internal variable ~#
+
+#~ determine_palindrome variables ~#
+declare d_palindrome_number 0 #~ argument ~#
+declare d_palindrome_result 0 #~ return value ~#
+declare d_palindrome_backwards 0 #~ internal variable ~#
+declare d_palindrome_last_digit 0 #~ internal variable ~#
+declare d_palindrome_number_copy 0 #~ internal variable ~#
+
+#~ main body variables ~#
+declare number 0
+@declarations
+
+
+@functions
+function determine_prime {
+    change d_prime_result 1
+    change d_prime_current 2
+    if |d_prime_number < 2| {
+        change d_prime_result 0
+    } {}
+    while |d_prime_current < d_prime_number|
+    {
+        if |!d_prime_number % d_prime_current! = 0| {
+            change d_prime_result 0
+        } {}
+        change d_prime_current !d_prime_current + 1!
+    }
+}
+
+function determine_palindrome {
+    change d_palindrome_number_copy d_palindrome_number
+    change d_palindrome_backwards 0
+    change d_palindrome_last_digit 0
+
+    while |d_palindrome_number > 0|
+    {
+        change d_palindrome_last_digit !d_palindrome_number % 10!
+        change d_palindrome_backwards !!d_palindrome_backwards * 10! + d_palindrome_last_digit!
+        change d_palindrome_number !d_palindrome_number / 10!
+    }
+    if |d_palindrome_backwards = d_palindrome_number_copy|
+    {
+        change d_palindrome_result 1
+    } {
+        change d_palindrome_result 0
+    }  
+}
+@functions
+
+
+@body
+show `enter a number` #~ gets user input ~#
+capture number
+
+change d_prime_number number
+run determine_prime
+
+change d_palindrome_number number
+run determine_palindrome
+
+if ||d_prime_result = 1| and |d_palindrome_result = 1||
+{
+    show `It is both a palindrome and a prime :)`
+} {
+    show `It is not a palindrome and a prime :(`
+}
+@body

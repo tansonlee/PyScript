@@ -1,0 +1,33 @@
+@declarations
+declare number 0
+declare current_number 0
+@declarations
+
+@functions
+ #~ 
+    find the number, x, such that 
+    x * x > number and
+    (x-1) * (x-1) <= number 
+~#
+function determine_square_root {
+    while ||!current_number * current_number! < number| or
+           |!current_number * current_number! = number||
+    {
+        change current_number !current_number + 1!
+    }
+}
+@functions
+
+@body
+#~ prompt for user input ~#
+show `enter an integer, n`
+capture number
+
+show `the integer square root of n is`
+if |number < 0| {
+    show `undefined`
+} {
+    run determine_square_root
+    show !current_number - 1!
+}
+@body

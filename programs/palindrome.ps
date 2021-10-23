@@ -1,0 +1,37 @@
+#~ Gets integer from user input and determines if it is a palindrome ~#
+
+@declarations
+declare number 0
+declare number_copy 0
+declare backwards 0
+declare last_digit 0
+@declarations
+
+@functions
+function get_backwards_number {
+    change number_copy number
+
+    while |number_copy > 0|
+    {
+        change last_digit !number_copy % 10!
+        change backwards !!backwards * 10! + last_digit!
+        change number_copy !number_copy / 10!
+    }
+}
+@functions
+
+@body
+show `Enter an integer, n`
+capture number
+
+run get_backwards_number
+
+if |number = backwards|
+{
+    show `It is a palindrome`
+} {
+    show `It is not a palindrome`
+}
+@body
+
+

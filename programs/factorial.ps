@@ -1,0 +1,33 @@
+@declarations
+#~ factorial function variables ~#
+declare factorial_number 0 #~ argument ~#
+declare factorial_result 1 #~ return value ~#
+
+#~ main body variables ~#
+declare number 0
+@declarations
+
+@functions
+function factorial {
+    change factorial_result 1
+    run factorial_helper
+}
+
+function factorial_helper {
+    if |factorial_number > 1|
+    {
+        change factorial_result !factorial_result * factorial_number!
+        change factorial_number !factorial_number - 1!
+        run factorial_helper
+    } {}
+}
+
+@functions
+
+@body
+show `enter a number`
+capture number
+change factorial_number number
+run factorial
+show factorial_result
+@body

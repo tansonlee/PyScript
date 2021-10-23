@@ -1,0 +1,35 @@
+
+
+from typing import Union
+
+
+PLUS = "PLUS"
+MINUS = "MINUS"
+MULTIPLY = "MULTIPLY"
+DIVIDE = "DIVIDE"
+MOD = "MOD"
+NumberOperations = Union[PLUS, MINUS, MULTIPLY, DIVIDE, MOD]
+
+EQUAL = "EQUAL"
+NOTEQUAL = "NOTEQUAL"
+LESSTHAN = "LESSTHAN"
+GREATERTHAN = "GREATERTHAN"
+BooleanComparisons = Union[EQUAL, NOTEQUAL, LESSTHAN, GREATERTHAN]
+
+NOT = "NOT"
+BooleanUnaryOperations = Union[NOT]
+
+AND = "AND"
+OR = "OR"
+BooleanBinaryOperations = Union[AND, OR]
+
+TRUEBOOL = "true"
+FALSEBOOL = "false"
+BooleanLiterals = Union[TRUEBOOL, FALSEBOOL]
+
+STRINGQUOTE = "`"
+DECLARATIONSEPERATOR = "$$$"
+COMMENTSTART = "#~"
+COMMENTEND = "~#"
+ENCLOSEBOOLEAN = "|"
+ENCLOSENUMBER = "!"

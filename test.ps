@@ -1,0 +1,35 @@
+
+@declarations
+declare height 185
+declare weight 100
+declare count 0
+@declarations
+
+
+@functions
+function print_info {
+    show height
+    show weight
+}
+function add {
+    show !height + weight!
+}
+function add1_to_count {
+    change count !count + 1!
+}
+
+@functions
+
+@body
+run print_info
+run add
+
+while |count < 20|
+{
+    show count
+    run add1_to_count
+}
+
+
+
+@body

@@ -1,0 +1,46 @@
+@declarations
+declare number 0
+declare steps 0
+@declarations
+
+@functions
+function iterate_number {
+    if | !number % 2! = 0 |
+    {
+        run iterate_even
+    } {
+        run iterate_odd
+    }
+}
+
+function iterate_even {
+    change number !number / 2!
+}
+
+function iterate_odd {
+    change number !!number * 3! + 1!
+}
+
+function increment_steps {
+    change steps !steps + 1!
+}
+
+function collatz {
+    if |number > 1| {
+        run iterate_number
+        run increment_steps
+        run collatz 
+    } {}
+}
+@functions
+
+@body
+show `The Collatz Conjecture steps calculator`
+show `enter an integer, n`
+capture number
+
+run collatz
+
+show `Using the rules in the Collatz Conjecture, the number of steps n takes to reach 1 is`
+show steps
+@body
