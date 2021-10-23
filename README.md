@@ -111,6 +111,8 @@ _Note: comments cannot be nested_
 
 ## Examples
 
+Many examples can be found in the repository in the programs folder
+
 ### Echo
 
 A simple program which echos the value inputted.
