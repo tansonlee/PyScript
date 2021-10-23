@@ -75,8 +75,8 @@ executed from top to bottom synchronously.
 | `change`  | `change counter 100`    | Changes the variable `counter` to 100.        |
 | `show`    | `show counter`          | Outputs the variable `counter`.               |
 | `capture` | `capture height`        | Stores user input into the variable `height`. |
-| `if`      | ``if | height > 100 | { show `tall` } { show `short` }`` |
-| `while`   | `while | count > 0 | { change count !count - 1! } `     |
+| `if`      | ``if \| height > 100 \| { show `tall` } { show `short` }`` | If statement. |
+| `while`   | `while \| count > 0 \| { change count !count - 1! } `     | While loop. |
 | `skip`    | `skip`                  | Does nothing.                                 |
 | `run`     | `run increment_counter` | Runs the function `increment_counter`         |
 
@@ -328,7 +328,7 @@ where `<function name>` is the name of the function
 
 `<variable name>` is a word which cannot contain any of
 
-`!` `<` `>` `=` ``\` `+` `-` `*` `/` `"` `|` ` `
+`!` `<` `>` `=` `` ` `` `+` `-` `*` `/` `"` `|` ` `
 
 ### Numbers
 
