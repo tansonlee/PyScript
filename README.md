@@ -39,7 +39,7 @@ This project is composed of several parts:
 * **Interpreter**: interprets PyScript code
 * **Assembler**: turns PyScript code into assembly
 * **Compiler**: compiles assembly code into machine code
-* **Computer**: simulates a computer in executing compiled code
+* **Computer**: simulates a computer by executing compiled code
 
 ### Parser
 
@@ -99,7 +99,37 @@ The CPU uses a fetch-decode-execute cycle to interpret each instruction.
 
 ## How to Use
 
+A version can be found on repl.it here: [https://replit.com/@TansonL/PyScript#.replit](https://replit.com/@TansonL/PyScript#.replit)
 
+Usage through the command line is as follows:
+**Execute the program with Python3**
+
+```
+Usage: main.py [file] [flag]
+
+Flags:
+    -interpret
+    -compile
+    -get-compiled [output_file]
+    -get-assembled [output_file]
+    -run-assembled
+    -run-compiled
+
+All Possibilities:
+    main.py
+    main.py -help
+    main.py input_file
+    main.py input_file -interpret
+    main.py input_file -compile
+    main.py input_file -get-compiled
+    main.py input_file -get-assembled
+    main.py input_file -get-compiled [output_file]
+    main.py input_file -get-assembled [output_file]
+    main.py input_file -run-assembled
+    main.py input_file -run-compiled
+```
+
+The default mode is `-interpret` and the default file is `test.ps`.
 
 ## Syntax Overview
 
