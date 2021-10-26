@@ -101,8 +101,9 @@ The CPU uses a fetch-decode-execute cycle to interpret each instruction.
 
 A version can be found on repl.it here: [https://replit.com/@TansonL/PyScript#.replit](https://replit.com/@TansonL/PyScript#.replit)
 
-Usage through the command line is as follows:
 **Execute the program with Python3**
+
+Usage through the command line is as follows:
 
 ```
 Usage: main.py [file] [flag]
