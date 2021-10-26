@@ -3,26 +3,36 @@
 ## Table of Contents
 
 1. [Introduction](#introduction)
-2. [Syntax Overview](#syntax-overview)
+2. [About The Project](#about-the-project)
+3. [Syntax Overview](#syntax-overview)
     * [Declarations](#declarations)
     * [Functions](#functions)
     * [Body](#body)
     * [Commands](#commands)
     * [Values](#values)
-3. [Examples](#examples)
+4. [Examples](#examples)
     * [Echo](#echo)
     * [Factorial](#factorial)
     * [Palindromic Prime](#palindromic-prime)
-4. [Formal Syntax](#formal-syntax)
-5. [Formal Semantics](@formal-semantics)
+5. [Formal Syntax](#formal-syntax)
+6. [Formal Semantics](@formal-semantics)
 
 ## Introduction
 
 A Sandbox is availible in repl.it: [sandbox](https://replit.com/@TansonL/PyScript#program.ps).
 
-PyScript is a scripting language implemented in Python.
+PyScript is a scripting language implemented in Python which is can be both interpreted and compiled.
 The syntax is easy to learn and has the core features of any programming language.
 There are variables, functions, loops, conditionals, and I/O.
+
+## About the Project
+
+This project is composed of several parts:
+
+* Interpreter: interprets PyScript code
+* Assembler: turns PyScript code into assembly
+* Compiler: compiles assembly code into machine code
+* Computer: simulates a computer in executing compiled code
 
 ## Syntax Overview
 
