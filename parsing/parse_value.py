@@ -40,22 +40,23 @@ def parse_number(string: str) -> Number:
     right = ""
     for i in range(len(string)):
         for current_operator in number_operators:
-            if string[i:i+len(current_operator)] == current_operator:
-                left = string[0:i].strip()
-                right = string[i+len(current_operator):].strip()
-                operator = current_operator
-                if is_single_number_token(left) and is_single_number_token(right):
-                    break
+            if string[i:i+len(current_operator)] != current_operator:
+                continue
 
-    parsed_number = NBinary(get_operation_type(operator), parse_number(left), parse_number(right))
-    return Number(NBinary, parsed_number)
+            left = string[0:i].strip()
+            right = string[i+len(current_operator):].strip()
+            operator = current_operator
+            if is_single_number_token(left) and is_single_number_token(right):
+                parsed_number = NBinary(get_operation_type(operator), parse_number(left), parse_number(right))
+                return Number(NBinary, parsed_number)
+
 
 def boolean(value: str) -> bool:
     if value == FALSEBOOL:
         return False
     if value == TRUEBOOL:
         return True
-    print("unreachable in boolean")
+    print(f"unreachable in boolean, {value}")
 
 def parse_boolean(string: str) -> Boolean:
     string = string.strip()
@@ -71,7 +72,7 @@ def parse_boolean(string: str) -> Boolean:
     first_space = string.find(" ")
     for current_operation in boolean_unary_operators:
         if string[0:first_space] == current_operation:
-            parsed_boolean = BUnary(get_operation_type(current_operation), parse_boolean(string.strip()))
+            parsed_boolean = BUnary(get_operation_type(current_operation), parse_boolean(string[first_space:].strip()))
             return Boolean(BUnary, parsed_boolean)
 
     # boolean binary operators
@@ -94,7 +95,7 @@ def parse_boolean(string: str) -> Boolean:
                     parsed_boolean = BCompare(get_operation_type(current_operation), parse_number(left), parse_number(right))
                     return Boolean(BCompare, parsed_boolean)
     
-    print("unreachable in parse_boolean")
+    print(f"unreachable in parse_boolean, bad value {string}")
 
 def parse_string(value) -> str:
     

@@ -1,35 +1,30 @@
-
 @declarations
-declare height 185
-declare weight 100
-declare count 0
+declare number 0
+declare current_number 0
+declare temp 0
+declare fn 0
+declare fnp1 1
 @declarations
-
 
 @functions
-function print_info {
-    show height
-    show weight
+function iterate_once {
+    change temp fn
+    change fn fnp1
+    change fnp1 !fnp1 + temp!
+    change current_number !current_number + 1!
 }
-function add {
-    show !height + weight!
-}
-function add1_to_count {
-    change count !count + 1!
-}
-
 @functions
 
 @body
-run print_info
-run add
+show `enter an integer, n`
+capture number
 
-while |count < 20|
+while |current_number < number|
 {
-    show count
-    run add1_to_count
+    run iterate_once
 }
 
-
-
+show `the nth fibonacci number is`
+show fn
 @body
+

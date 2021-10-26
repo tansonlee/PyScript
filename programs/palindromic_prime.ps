@@ -13,6 +13,7 @@ declare d_palindrome_number_copy 0 #~ internal variable ~#
 
 #~ main body variables ~#
 declare number 0
+declare current_number 0 
 @declarations
 
 
@@ -57,16 +58,19 @@ function determine_palindrome {
 show `enter a number` #~ gets user input ~#
 capture number
 
-change d_prime_number number
-run determine_prime
-
-change d_palindrome_number number
-run determine_palindrome
-
-if ||d_prime_result = 1| and |d_palindrome_result = 1||
+while |current_number < number|
 {
-    show `It is both a palindrome and a prime :)`
-} {
-    show `It is not a palindrome and a prime :(`
+    change d_prime_number current_number
+    run determine_prime
+
+    change d_palindrome_number current_number
+    run determine_palindrome
+
+    if ||d_prime_result = 1| and |d_palindrome_result = 1||
+    {
+        show current_number
+    } {}
+
+    change current_number !current_number + 1!
 }
 @body
