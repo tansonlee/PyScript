@@ -4,13 +4,13 @@ from os import link
 from typing import Dict, List
 from compiler.compiler import my_split
 
-arithmetic_ops = ["001000", "001001", "001010", "001011", "001100"]
-comparison_ops = ["010000", "010001", "010010", "010011"]
-binary_boolean_ops = ["011000", "011001"]
-unary_boolean_ops = ["011010"]
-branching_ops = ["100000", "100001", "100010", "100011"]
-io_ops = ["101000", "101001", "101010"]
-other_ops = ["000001"]
+arithmetic_ops = ["ADD", "SUB", "MUL", "DIV", "MOD"]
+comparison_ops = ["EQ", "NE", "GT", "LT"]
+binary_boolean_ops = ["AND", "ORR"]
+unary_boolean_ops = ["NOT"]
+branching_ops = ["BRCH", "CBZR", "CBNZ", "BLNK"]
+io_ops = ["READ", "PVAL", "PSTR"]
+other_ops = ["MOV"]
 
 def ram_fetch(ram: Dict, addr: int) -> int:
     return ram[addr]
@@ -25,7 +25,7 @@ def execute_machine_code(code: List[str]):
 
     while True:
         command = ram[pc]
-        if isinstance(command, int) or command == "000000":
+        if isinstance(command, int) or command == "HALT":
             # print("CORE DUMPED")
             # for i in ram.keys():
             #     print(f"{i}: {ram[i]}")
@@ -86,15 +86,15 @@ def execute_arithmetic_op(command, ram):
     left = get_value(command[2], ram)
     right = get_value(command[3], ram)
     result = 0
-    if op == "001000":
+    if op == "ADD":
         result = left + right
-    elif op == "001001":
+    elif op == "SUB":
         result = left - right
-    elif op == "001010":
+    elif op == "MUL":
         result = left * right
-    elif op == "001011":
+    elif op == "DIV":
         result = left // right
-    elif op == "001100":
+    elif op == "MOD":
         result = left % right
     else:
         assert False, f"Unreachable in execute_arithmetic_op, bad command {command}"
@@ -108,13 +108,13 @@ def execute_comparison_op(command, ram):
     left = get_value(command[2], ram)
     right = get_value(command[3], ram)
     result = 0
-    if op == "010000":
+    if op == "EQ":
         result = bool_to_int(left == right)
-    elif op == "010001":
+    elif op == "NE":
         result = bool_to_int(left != right)
-    elif op == "010010":
+    elif op == "GT":
         result = bool_to_int(left > right)
-    elif op == "010011":
+    elif op == "LT":
         result = bool_to_int(left < right)
     else:
         assert False, f"Unreachable in execute_comparison_op, bad command {command}"
@@ -127,9 +127,9 @@ def execute_binary_boolean_op(command, ram):
     left = int_to_bool(get_value(command[2], ram))
     right = int_to_bool(get_value(command[3], ram))
     result = 0
-    if op == "011000":
+    if op == "AND":
         result = left and right
-    elif op == "011001":
+    elif op == "ORR":
         result = left or right
     else:
         assert False, f"Unreachable in execute_binary_boolean_op, bad command {command}"
@@ -140,17 +140,17 @@ def execute_unary_boolean_op(command, ram):
     op = command[0]
     destination = get_destination(command[1], ram)
     body = int_to_bool(get_value(command[2], ram))
-    if op == "011010":
+    if op == "NOT":
         ram[destination] = bool_to_int(not body)
     else:
         assert False, f"Unreachable in execute_unary_boolean_op, bad command {command}"
 
 def execute_branching_op(command, ram, pc):
     op = command[0]
-    if op == "100000":
+    if op == "BRCH":
         target = get_value2(command[1], ram)
         return target
-    elif op == "100010":
+    elif op == "CBNZ":
         condition = ram[get_destination(command[1], ram)]
         if condition == 1:
             return int(command[2])
@@ -158,7 +158,7 @@ def execute_branching_op(command, ram, pc):
             return pc + 1
         else:
             assert False, f"Unreachable in execute_branching_op > CBNZ, bad condition {condition}"
-    elif op == "100001":
+    elif op == "CBZR":
         condition = ram[get_destination(command[1], ram)]
         if condition == 0:
             return int(command[2])
@@ -166,7 +166,7 @@ def execute_branching_op(command, ram, pc):
             return pc + 1
         else:
             assert False, f"Unreachable in execute_branching_op > CBZR, bad condition {condition}"
-    elif op == "100011":
+    elif op == "BLNK":
         link_address = get_destination(command[1], ram)
         ram[link_address] = pc + 1
         return int(command[2])
@@ -177,12 +177,13 @@ def execute_branching_op(command, ram, pc):
 
 def execute_io_op(command, ram):
     op = command[0]
-    if op == "101010":
+    # READ
+    if op == "PSTR":
         print(command[1][1:-1]) # strip the quotes ""
-    elif op == "101001":
+    elif op == "PVAL":
         value_address = get_destination(command[1], ram)
         print(ram[value_address])
-    elif op == "101000":
+    elif op == "READ":
         user_input = int(input())
         destination = int(command[1])
         ram[destination] = user_input
@@ -192,7 +193,7 @@ def execute_io_op(command, ram):
 def execute_other_ops(command, ram):
     op = command[0]
 
-    if op == "000001":
+    if op == "MOV":
         destination = get_destination(command[1], ram)
         value = get_value(command[2], ram)
         ram[destination] = value

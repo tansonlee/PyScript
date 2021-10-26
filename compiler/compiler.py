@@ -1,6 +1,3 @@
-
-
-from os import close
 from typing import Dict, List
 
 
@@ -10,8 +7,51 @@ def compile(program: List[str]) -> List[str]:
     program = handle_data(program, state)
     state = process_state(state)
     program = replace_vars(program, state)
+    program = replace_commands(program)
 
     return program
+
+
+def replace_commands(program: List[str]) -> List[str]:
+    result = []
+    for command in program:
+        split_command = my_split(command)
+        op_code = get_op_code(split_command[0])
+        split_command[0] = op_code
+        result.append(" ".join(split_command))
+    return result
+
+def get_op_code(operation):
+    op_code_table = {
+        "HALT": "000000",
+        "MOV": "000001",
+        "ADD": "001000",
+        "SUB": "001001",
+        "MUL": "001010",
+        "DIV": "001011",
+        "MOD": "001100",
+        "EQ": "010000",
+        "NE": "010001",
+        "GT": "010010",
+        "LT": "010011",
+        "AND": "011000",
+        "ORR": "011001",
+        "NOT": "011010",
+        "BRCH": "100000",
+        "CBZR": "100001",
+        "CBNZ": "100010",
+        "BLNK": "100011",
+        "READ": "101000",
+        "PVAL": "101001",
+        "PSTR": "101010",
+        "LABEL": "110000",
+        "CONST": "110001",
+        "DATA": "110010"
+    }
+    if operation not in op_code_table:
+        return operation
+    return op_code_table[operation]
+
 
 # removes LABELs from the program and adds them to the state
 def handle_label(program: List[str], state: Dict) -> List[str]:
