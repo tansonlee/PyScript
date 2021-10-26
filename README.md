@@ -29,7 +29,7 @@ A Sandbox is availible in repl.it: [sandbox](https://replit.com/@TansonL/PyScrip
 
 PyScript is a scripting language implemented in Python which can be both interpreted and compiled.
 The syntax is easy to learn and has the core features of any programming language.
-There are variables, functions, loops, conditionals, and I/O.
+There are variables, functions, loops, conditionals, I/O, and comments.
 
 ## About the Project
 
@@ -162,7 +162,7 @@ _Note: variables can only take on numerical values_
 The functions section allows for a list of subroutines which look like:
 
 ```
-function <funciton name> {
+function <function name> {
     <function body>
 }
 
@@ -244,7 +244,7 @@ show number
 
 ### Factorial
 
-A program that determines the factorial of a number using tail a tailr ecursive technique.
+A program that determines the factorial of a number using a tail recursive technique.
 
 ```
 @declarations
