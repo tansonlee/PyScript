@@ -1,7 +1,6 @@
 
 
 from typing import List
-from interpreter import get_functions_table
 
 from tokenization.commands import Capture, Change, Declaration, Function, Command, If, Run, Show, Skip, While
 from tokenization.value import BBinary, BCompare, BLiteral, BUnary, Boolean, NBinary, NLiteral, NVariable, Number, String, Value

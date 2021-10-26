@@ -1,7 +1,7 @@
 import sys
 from compiler.computer import execute_machine_code
 
-from interpreter import interpret
+from interpreter.interpreter import interpret
 from parsing.parse import parse
 from compiler.assembler import assemble
 from compiler.compiler import compile

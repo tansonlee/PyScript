@@ -18,7 +18,7 @@ Assembly language
 [x] BRCH <location>
 [x] CBZR <source> <location>
 [x] CBNZ <source> <location>
-[ ] BLNK <destination> <location>
+[x] BLNK <destination> <location>
 
 [x] READ <source>
 [x] PVAL <source>
@@ -87,10 +87,10 @@ Assembled Body:
 [x] Change
 [x] Show
 [x] Capture
-[ ] If
-[ ] While
+[x] If
+[x] While
 [x] Skip
-[ ] Run
+[x] Run
 
 `Change(var, val)`
 

@@ -1,4 +1,3 @@
-from interpreter import FALSEBOOL
 from tokenization.commands import Run, Show, Capture, Change, If, While, Skip
 
 from tokenization.enums import STRINGQUOTE, ENCLOSENUMBER, ENCLOSEBOOLEAN
