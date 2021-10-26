@@ -4,6 +4,12 @@
 
 1. [Introduction](#introduction)
 2. [About The Project](#about-the-project)
+    * [Parser](#parser)
+    * [Interpreter](#interpreter)
+    * [Assembler](#assembler)
+    * [Compiler](#compiler)
+    * [Computer](#computer)
+3. [How to Use](#how-to-use)
 3. [Syntax Overview](#syntax-overview)
     * [Declarations](#declarations)
     * [Functions](#functions)
@@ -21,7 +27,7 @@
 
 A Sandbox is availible in repl.it: [sandbox](https://replit.com/@TansonL/PyScript#program.ps).
 
-PyScript is a scripting language implemented in Python which is can be both interpreted and compiled.
+PyScript is a scripting language implemented in Python which can be both interpreted and compiled.
 The syntax is easy to learn and has the core features of any programming language.
 There are variables, functions, loops, conditionals, and I/O.
 
@@ -29,10 +35,71 @@ There are variables, functions, loops, conditionals, and I/O.
 
 This project is composed of several parts:
 
-* Interpreter: interprets PyScript code
-* Assembler: turns PyScript code into assembly
-* Compiler: compiles assembly code into machine code
-* Computer: simulates a computer in executing compiled code
+* **Parser**: parses the PyScript code and creates an AST (abstract syntax tree)
+* **Interpreter**: interprets PyScript code
+* **Assembler**: turns PyScript code into assembly
+* **Compiler**: compiles assembly code into machine code
+* **Computer**: simulates a computer in executing compiled code
+
+### Parser
+
+The parser takes the PyScript program and translates it into it's corresponding AST (abstract syntax tree).
+This step is crucial in making the interpreter and assembler more simple.
+
+### Interpreter
+
+The interpreter takes the parsed PyScript program and runs it without any additional translation.
+
+### Assembler
+
+The assembler takes the parsed PyScript program and creates assembly code which represents the program.
+This assembly code is custom assembly representing operations for a RISC (reduced instruction set computer) computer inspired by ARM.
+The instruction set contains 24 instruction.
+A snippet of assembly code follows:
+
+```
+BRCH _START_BODY
+DATA number 0
+LABEL _FUNCTION_increment_number
+MOV (0 _STACK_POINTER) _RETURN_ADDRESS
+ADD _STACK_POINTER _STACK_POINTER 1
+MOV _RESULT number
+MOV (0 _STACK_POINTER) _RESULT
+ADD _STACK_POINTER _STACK_POINTER 1
+MOV _RESULT 1
+ADD _RESULT (-1 _STACK_POINTER) _RESULT
+...
+```
+
+### Compiler
+
+The compiler takes the custom assembled PyScript code and reduces it to machine code.
+The machine code also uses custom op codes and instruction representation.
+A snippet of compiled code follows:
+
+```
+000001 (0 (30)) (29)
+001000 (30) (30) 1
+000001 (28) (1)
+000001 (0 (30)) (28)
+001000 (30) (30) 1
+000001 (28) 1
+001000 (28) (-1 (30)) (28)
+001001 (30) (30) 1
+000001 (1) (28)
+000001 (29) (-1 (30))
+...
+```
+
+### Computer
+
+Since the compiled code uses custom op codes and instructions, a custom computer simulator must be created.
+This computer is a stored program computer meaning the instructions and data exist in the same memory.
+The CPU uses a fetch-decode-execute cycle to interpret each instruction.
+
+## How to Use
+
+
 
 ## Syntax Overview
 
