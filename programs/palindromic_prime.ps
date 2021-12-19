@@ -3,6 +3,7 @@
 declare d_prime_number 0 #~ argument ~#
 declare d_prime_result 0 #~ return value ~#
 declare d_prime_current 0 #~ internal variable ~#
+declare d_prime_limit 0 #~ internal variable ~#
 
 #~ determine_palindrome variables ~#
 declare d_palindrome_number 0 #~ argument ~#
@@ -11,11 +12,14 @@ declare d_palindrome_backwards 0 #~ internal variable ~#
 declare d_palindrome_last_digit 0 #~ internal variable ~#
 declare d_palindrome_number_copy 0 #~ internal variable ~#
 
+#~ determine_square_root variables ~#
+declare sr_number 0 #~ argument ~#
+declare sr_result 0 #~ return value ~#
+
 #~ main body variables ~#
 declare number 0
 declare current_number 0 
 @declarations
-
 
 @functions
 function determine_prime {
@@ -24,12 +28,24 @@ function determine_prime {
     if |d_prime_number < 2| {
         change d_prime_result 0
     } {}
-    while |d_prime_current < d_prime_number|
+    change sr_number d_prime_number
+    run determine_square_root
+    change d_prime_limit sr_result
+    while |d_prime_current < d_prime_limit|
     {
         if |!d_prime_number % d_prime_current! = 0| {
             change d_prime_result 0
         } {}
         change d_prime_current !d_prime_current + 1!
+    }
+}
+
+function determine_square_root {
+    change sr_result 0
+    while ||!sr_result * sr_result! < sr_number| or
+           |!sr_result * sr_result! = sr_number||
+    {
+        change sr_result !sr_result + 1!
     }
 }
 
@@ -55,8 +71,9 @@ function determine_palindrome {
 
 
 @body
-show `enter a number` #~ gets user input ~#
+show `enter a number, n` #~ gets user input ~#
 capture number
+show `palindromic primes up to n are:`
 
 while |current_number < number|
 {

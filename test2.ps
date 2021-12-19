@@ -1,0 +1,16 @@
+@declarations
+declare n 10
+@declarations
+
+@functions
+function main {
+    while |n > 0| {
+        show n
+        change n !n - 1!
+    }
+}
+@functions
+
+@body
+run main
+@body
