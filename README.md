@@ -99,7 +99,7 @@ The CPU uses a fetch-decode-execute cycle to interpret each instruction.
 
 ## How to Use
 
-A version can be found on repl.it here: [https://replit.com/@TansonL/PyScript#.replit](https://replit.com/@TansonL/PyScript#.replit)
+A version can be found on repl.it here: [sandbox](https://replit.com/@TansonL/PyScript#program.ps)
 
 **Execute the program with Python3**
 
