@@ -162,7 +162,7 @@ def interpret_boolean(value: Boolean, state) -> bool:
     if type == BCompare:
         return interpret_bcompare(value.content, state)
     elif type == BUnary:
-        return interpret_bunary(Value.content, state)
+        return interpret_bunary(value.content, state)
     elif type == BBinary:
         return interpret_bbinary(value.content, state)
     elif type == BLiteral:
